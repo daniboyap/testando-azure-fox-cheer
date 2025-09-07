@@ -31,13 +31,13 @@ const PersonList = ({ people }: PersonListProps) => {
                 <AccordionItem value={`item-${person.id}`} key={person.id}>
                 <AccordionTrigger>
                     <div className="flex justify-between w-full pr-4">
-                        <span>{person.fullName}</span>
+                        <span>{person.full_name}</span>
                         <span className="text-gray-500">{person.cpf}</span>
                     </div>
                 </AccordionTrigger>
                 <AccordionContent>
                     <div className="space-y-2 p-2">
-                        <p><strong>Data de Nascimento:</strong> {person.birthDate}</p>
+                        <p><strong>Data de Nascimento:</strong> {person.birth_date}</p>
                         <p><strong>Endereço:</strong> {person.address}</p>
                         <p><strong>Telefone:</strong> {person.phone}</p>
                     </div>

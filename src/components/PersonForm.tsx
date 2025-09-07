@@ -6,32 +6,31 @@ import { Label } from '@/components/ui/label';
 import { showSuccess } from '@/utils/toast';
 
 export interface Person {
-  id: number;
-  fullName: string;
+  id?: number;
+  full_name: string;
   cpf: string;
-  birthDate: string;
+  birth_date: string;
   address: string;
   phone: string;
 }
 
 interface PersonFormProps {
-  onSave: (person: Person) => void;
+  onSave: (person: Omit<Person, 'id'>) => void;
 }
 
 const PersonForm = ({ onSave }: PersonFormProps) => {
-  const [fullName, setFullName] = useState('');
+  const [full_name, setFullName] = useState('');
   const [cpf, setCpf] = useState('');
-  const [birthDate, setBirthDate] = useState('');
+  const [birth_date, setBirthDate] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newPerson: Person = {
-      id: Date.now(),
-      fullName,
+    const newPerson: Omit<Person, 'id'> = {
+      full_name,
       cpf,
-      birthDate,
+      birth_date,
       address,
       phone,
     };
@@ -55,7 +54,7 @@ const PersonForm = ({ onSave }: PersonFormProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="fullName">Nome completo</Label>
-              <Input id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+              <Input id="fullName" value={full_name} onChange={(e) => setFullName(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="cpf">CPF</Label>
@@ -63,7 +62,7 @@ const PersonForm = ({ onSave }: PersonFormProps) => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="birthDate">Data de nascimento</Label>
-              <Input id="birthDate" type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
+              <Input id="birthDate" type="date" value={birth_date} onChange={(e) => setBirthDate(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">Telefone</Label>
