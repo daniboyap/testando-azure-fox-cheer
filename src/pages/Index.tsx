@@ -1,17 +1,31 @@
-// Update this page (the content is just a fallback if you fail to update the page)
-
-import { MadeWithDyad } from "@/components/made-with-dyad";
+import { useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
+import { Button } from '@/components/ui/button';
+import PersonForm, { Person } from '@/components/PersonForm';
+import PersonList from '@/components/PersonList';
 
 const Index = () => {
+  const { currentUser, logout } = useAuth();
+  const [people, setPeople] = useState<Person[]>([]);
+
+  const handleSavePerson = (person: Person) => {
+    setPeople(prevPeople => [...prevPeople, person]);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">
-          Start building your amazing project here!
-        </p>
-      </div>
-      <MadeWithDyad />
+    <div className="container mx-auto p-4 md:p-8">
+      <header className="flex justify-between items-center mb-8">
+        <div>
+          <h1 className="text-2xl font-bold">Bem-vindo(a), {currentUser?.name}!</h1>
+          <p className="text-gray-500">Gerencie os cadastros de pessoas físicas.</p>
+        </div>
+        <Button onClick={logout} variant="outline">Sair</Button>
+      </header>
+      
+      <main>
+        <PersonForm onSave={handleSavePerson} />
+        <PersonList people={people} />
+      </main>
     </div>
   );
 };
